@@ -1,13 +1,17 @@
 letter_dictionary = {}
 
 def main():
-    with open("books/frankenstein.txt") as book:
+    book_path = "books/frankenstein.txt"
+    with open(book_path) as book:
         text = book.read()
         number_of_words = countWords(text)
-        print(number_of_words)
-
         number_of_letters = countLetters(text)
-        print(letter_dictionary)
+    letter_dictionary = sorted(letter_dictionary, key=letter_dictionary.get, reverse=True)
+    print(f"--- Begin report of {book_path} ---")
+    print(f"{number_of_words} words found in the document")
+    for character in letter_dictionary:
+        print(f"The {character} was found {letter_dictionary[character]} times")
+    print("--- End report ---")
 
 def countWords(text):
     words = text.split()
@@ -21,4 +25,5 @@ def countLetters(text):
         else:
             letter_dictionary[lowercase_letter] = 1
     return letter_dictionary
+
 main()
